@@ -10,7 +10,7 @@ KAIST
 <!-- <a href="https://arxiv.org/abs/2512.xxxxx"><img src='https://img.shields.io/badge/arXiv-AmbulatoryVision-red' alt='Paper PDF'></a> -->
 <a href='https://active-view-selection.github.io'><img src='https://img.shields.io/badge/Project_Page-AmbulatoryVision-green' alt='Project Page'></a>
 
-<img src="./vgavs_teaser.png" alt="VGAVS Teaser" width="100%">
+<img src="./assets/vgavs_teaser.png" alt="VGAVS Teaser" width="100%">
 
 ## TL;DR
 <i>We introduce Visually Grounded Active View Selection (VG-AVS) Framework, enabling embodied agents to actively adjust their viewpoint for better Visual Question Answering using only current visual cues, achieving state-of-the-art performance on synthetic and real-world benchmarks.</i>
