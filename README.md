@@ -16,5 +16,5 @@ KAIST
 <i>We introduce Visually Grounded Active View Selection (VG-AVS) Framework, enabling embodied agents to actively adjust their viewpoint for better Visual Question Answering using only current visual cues, achieving state-of-the-art performance on synthetic and real-world benchmarks.</i>
 
 
-### Code - To be released!
+### Code will be released next week. Please give us a ⭐ and stay tuned if you are interested :)
 </div>
