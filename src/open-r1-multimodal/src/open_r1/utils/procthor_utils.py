@@ -136,7 +136,7 @@ def get_procthor_controller(
             width=width,
             height=height,
             fieldOfView=90,
-            #platform=CloudRendering if headless else None,
+            platform=CloudRendering,
             gpuDevice=gpu_device,
             host=resolved_host,
         )
