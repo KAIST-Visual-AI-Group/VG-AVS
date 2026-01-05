@@ -157,7 +157,8 @@ bash src/open-r1-multimodal/run_scripts/run_sft_procthor_active_qa.sh
 ```
 
 **2. GRPO Training (Reinforcement Learning):**
-Please note that you should set $MODEL_PATH as SFT pre-trained model's.
+
+Please note that you should set '$MODEL_PATH' variable as SFT pre-trained model's.
 ```bash
 # Set required paths
 bash src/open-r1-multimodal/run_scripts/run_grpo_procthor_active_qa.sh 
