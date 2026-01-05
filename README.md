@@ -11,6 +11,7 @@ KAIST
 
 <a href="https://arxiv.org/abs/2512.13250"><img src='https://img.shields.io/badge/arXiv-AmbulatoryVision-red' alt='Paper PDF'></a>
 <a href='https://active-view-selection.github.io'><img src='https://img.shields.io/badge/Project_Page-AmbulatoryVision-green' alt='Project Page'></a>
+<a href='https://huggingface.co/daehyeonchoi/VGAVS-model'><img src='https://img.shields.io/badge/🤗%20Hugging%20Face-AVS_Model-yellow' alt='AVS-Model'></a>
 <a href='https://huggingface.co/datasets/daehyeonchoi/VGAVS-Dataset'><img src='https://img.shields.io/badge/🤗%20Hugging%20Face-AVS_Dataset-blue' alt='AVS-Dataset'></a>
 <img src="./assets/vgavs_teaser.png" alt="VGAVS Teaser" width="100%">
 
@@ -20,9 +21,9 @@ KAIST
 </div>
 
 ## Release Checklist
-🚧 Pretrained (SFT, SFT+GRPO) model checkpoint. **(Expected due: early of January)**
+✅ Pretrained (SFT, SFT+GRPO) model checkpoint. **(01.05)**
 
-✅ AVS-ProcTHOR & AVS-HM3D dataset, training/inference/evaluation code. **(12.24)**
+✅ AVS-ProcTHOR & AVS-HM3D dataset, training/inference/evaluation code. **(01.02)**
 
 
 
@@ -78,7 +79,7 @@ tar -xvf hm3d-val-habitat-v0.2.tar
 tar -xvf hm3d-val-glb-v0.2.tar
 ```
 
-Then additionally download data snapshot from [huggingface](https://huggingface.co/datasets/daehyeonchoi/VGAVS-Dataset), then move it into "data" folder. 
+Then additionally download data snapshot from [HF repository](https://huggingface.co/datasets/daehyeonchoi/VGAVS-Dataset), then move it into "data" folder. 
 ```
 # move data samples in 'data' folder
 mv avs_hm3d.tar.gz ./data/
@@ -114,15 +115,14 @@ pip install . -v
 #### Sanity Check 
 Our framework utilizes two different types of simulation environment (AI2-THOR and HM3D), so before running the code, please check each environment works properly in your setting. 
 
-Please follow notebook/environment_check.ipynb.
+Please follow [notebook/environment_check.ipynb](https://github.com/KAIST-Visual-AI-Group/VG-AVS/blob/master/notebook/environment_check.ipynb).
 
 
 ### 4. Download Pretrained model
-We will release our pretrained model soon. Stay tuned:) 
+We provide our pretrained model checkpoint in [HF repository](https://huggingface.co/daehyeonchoi/VGAVS-model/tree/main). Download this model into your directory and set `MODEL_PATH` variable in your running script. 
 
 
 ### 5. Run
-
 Before running training or evaluation scripts, you need to configure the following paths and API keys.
 
 #### Configuration
@@ -131,7 +131,7 @@ Before running training or evaluation scripts, you need to configure the followi
 | Variable | Description | Example |
 |----------|-------------|---------|
 | `PROJECT_ROOT` | Root directory of the project | `/home/user/VG-AVS` |
-| `DATA_JSONL` | Path to training/evaluation JSONL file | `/path/to/data/avs_procthor_train.jsonl` |
+| `DATA_JSONL` | Path to training/evaluation JSONL file | `${PROJECT_ROOT}/data/avs_procthor_train.jsonl` |
 | `IMG_ROOT` | Root directory containing images | `${PROJECT_ROOT}/data` |
 | `MODEL_PATH` | Path to trained model (for evaluation) | `${PROJECT_ROOT}/src/open-r1-multimodal/output/grpo-procthor` |
 
@@ -142,25 +142,28 @@ export GEMINI_API_KEY="your_gemini_api_key"   # Required for Gemini verifier
 export OPENAI_API_KEY="your_openai_api_key"   # Optional, for GPT verifier
 ```
 
-#### Tutorial    
+### Tutorial    
 You can easliy test our framework in ProcTHOR environment. 
 ```bash
 bash src/open-r1-multimodal/run_scripts/test_procthor_single_sample.sh
 ```
 
-#### Training 
-**SFT Training (Supervised Fine-tuning):**
+### Training 
+With eight H200 GPUs, SFT training takes about 1 hour, and GRPO training takes about 20 hours.
+
+**1. SFT Training (Supervised Fine-tuning):**
 ```bash
 bash src/open-r1-multimodal/run_scripts/run_sft_procthor_active_qa.sh
 ```
 
-**GRPO Training (Reinforcement Learning):**
+**2. GRPO Training (Reinforcement Learning):**
+Please note that you should set $MODEL_PATH as SFT pre-trained model's.
 ```bash
 # Set required paths
 bash src/open-r1-multimodal/run_scripts/run_grpo_procthor_active_qa.sh 
 ```
 
-#### Evaluation   
+### Evaluation   
 **ProcTHOR Evaluation:**
 ```bash
 # Set required paths and API keys
@@ -172,6 +175,8 @@ bash src/open-r1-multimodal/run_scripts/test_procthor_action_accuracy.sh
 bash src/open-r1-multimodal/run_scripts/test_hm3d_action_accuracy.sh
 ```
 
+## Contact
+If you run into any issues, please open a GitHub issue or email us at daehyeonchoi@kaist.ac.kr.
 
 ## Acknowledgement
 Our implementation is built upon amazing projects including [Qwen2.5-VL](https://huggingface.co/Qwen/Qwen2.5-VL-7B-Instruct), [VLM-R1](https://github.com/om-ai-lab/VLM-R1), [AI2-THOR](https://ai2thor.allenai.org/), [Habitat-Sim](https://github.com/facebookresearch/habitat-sim). We greatly thank all authors and contributors for open-sourcing their code and model checkpoints.
